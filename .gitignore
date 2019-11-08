@@ -1,0 +1,8 @@
+*
+!*.gitignore
+!*.v
+!*.ucf
+!rom_content_2014.coe
+!UART_TX_CTRL.vhd
+!finalproject.gise
+!finalproject.xise
