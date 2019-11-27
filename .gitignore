@@ -2,5 +2,7 @@
 !*.gitignore
 !*.v
 !*.ucf
+!finalproject.gise
+!finalproject.xise
 !rom_content_2014.coe
 !UART_TX_CTRL.vhd

@@ -23,7 +23,8 @@ module ALU(
     input [nbit - 1:0] B,
     input [2:0] Sel,
 	 input shin,
-	 output reg [nbit - 1:0] num_out
+	 output reg [nbit - 1:0] num_out,
+	 output reg v, c, n, z
     );
 	 
 	 parameter nbit = 16;
@@ -32,8 +33,8 @@ module ALU(
 	 always @(*)
 		begin
 			case (Sel)
-				3'b000 : num_out = A + B;
-				3'b001 : num_out = A + ~B + 1;
+				3'b000 : {c,num_out} = A + B;
+				3'b001 : {n,num_out} = A - B;
 				3'b010 : num_out = A && B;
 				3'b011 : num_out = A || B;
 				3'b100 : num_out = A ^ B;
@@ -42,6 +43,10 @@ module ALU(
 				3'b111 : num_out = A>>shin;
 				default : num_out = 0;
 			endcase
+			if (num_out == 0)
+				z = 1;
+			if (c)
+				v = 1;
 		end
 
 endmodule
