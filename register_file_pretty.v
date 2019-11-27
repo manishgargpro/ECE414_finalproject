@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module register_file(
+module register_file_pretty(
 		input  clk_main, reset, EN,
 		input  [15:0] D,
 		input  [3:0] DA, AA, BA,
@@ -32,13 +32,13 @@ module register_file(
 
 	wire  sen; 
 
-	assign sen = clk || rst; 
+	assign sen = clk_main || reset; 
 
 	always @ (posedge sen) 
 		begin 
 			if (EN == 1) 
 				begin
-					if (rst == 1) //If at reset 
+					if (reset == 1) //If at reset 
 						begin
 							for (i = 0; i < 16; i = i + 1)
 								begin
@@ -46,7 +46,7 @@ module register_file(
 								end 
 							A = 16'bx;
 						end
-					else if (rst == 0) //If not at reset 
+					else if (reset == 0) //If not at reset 
 						begin 
 							//{RD,WR}
 							case (RW) 
