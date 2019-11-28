@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    18:08:43 11/26/2019 
+// Create Date:    02:18:42 11/28/2019 
 // Design Name: 
-// Module Name:    datapath 
+// Module Name:    control_logic 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,25 +18,25 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module datapath(
-    input clk_main, reset,
-    input [3:0] DR, SA, SB, FS,
-    input MB, MM, MD, MW, RW,
-    output [15:0] BusA, DataOut,
-    output V, C, N, Z
+module control_logic(
+    input state, V, C, N, Z,
+    input [3:0] opcode,
+	 //input [3:0] DR, SA, SB,
+    output [3:0] NS,
+    output [1:0] PS,
+    output IL,
+    //output [3:0] DX, AX, BX,
+    output MB,
+    output [3:0] FS,
+    output MD,
+    output RW,
+    output MM,
+    output MW
     );
 	 
-	 register_file instance_name (
-    .D(D), 
-    .DA(DA_w), 
-    .A(A), 
-    .AA(AA_w), 
-    .B(B), 
-    .BA(BA_w), 
-    .RW(RW), 
-    .rst(reset), 
-    .EN(EN), 
-    .clk(clk_main)
-    );
+	 assign NS = state;
+	 
+	 assign FS = opcode;
+
 
 endmodule

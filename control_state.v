@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    18:08:43 11/26/2019 
+// Create Date:    03:03:00 11/28/2019 
 // Design Name: 
-// Module Name:    datapath 
+// Module Name:    control_state 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,25 +18,20 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module datapath(
-    input clk_main, reset,
-    input [3:0] DR, SA, SB, FS,
-    input MB, MM, MD, MW, RW,
-    output [15:0] BusA, DataOut,
-    output V, C, N, Z
+module control_state(
+    input clk_main,
+    input reset,
+    input NS,
+    output reg next_state
     );
 	 
-	 register_file instance_name (
-    .D(D), 
-    .DA(DA_w), 
-    .A(A), 
-    .AA(AA_w), 
-    .B(B), 
-    .BA(BA_w), 
-    .RW(RW), 
-    .rst(reset), 
-    .EN(EN), 
-    .clk(clk_main)
-    );
+	 always @(posedge clk_main)
+		begin
+			if (reset)
+				next_state = 1'b0;
+			else
+				next_state = NS;
+		end
+
 
 endmodule
