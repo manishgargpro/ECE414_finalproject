@@ -19,10 +19,11 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module control_path(
-    input clk_main, reset, V, C, N, Z,
+    input clk_main, reset, Z,
     input [15:0] DataIn,
     input [3:0] BusA,
     output [3:0] DR, SA, SB, FS,
+	 output [5:0] PC,
     output MB, MM, MD, MW, RW
     );
 	 
@@ -60,10 +61,7 @@ module control_path(
 	 control_logic instance_name (
     .state(state_w), 
     .opcode(opcode_w), 
-    .V(V), 
-    .C(C), 
-    .N(N), 
-    .Z(Z), 
+    .Z(Z),
     .NS(NS_w), 
     .PS(PS_w), 
     .IL(IL_w), 

@@ -20,10 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 module datapath(
     input clk_main, reset,
-    input [3:0] DR, SA, SB, FS,
+    input [3:0] DR, SA, SB,
+	 input [3:0] FS,
+	 input [5:0] PC,
     input MB, MM, MD, MW, RW,
-    output [15:0] BusA, DataOut,
-    output V, C, N, Z
+    output [15:0] BusA, AddrOut, DataOut,
+    output Z
     );
 	 
 	 register_file instance_name (
@@ -37,6 +39,14 @@ module datapath(
     .rst(reset), 
     .EN(EN), 
     .clk(clk_main)
+    );
+	 
+	 ALU instance_name (
+    .A(A), 
+    .B(B), 
+    .FS(FS),
+    .num_out(num_out),
+    .z(z)
     );
 
 endmodule
