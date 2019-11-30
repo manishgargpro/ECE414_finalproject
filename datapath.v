@@ -29,7 +29,7 @@ module datapath(
     output Z
     );
 	 
-	 register_file instance_name (
+	 register_file RF (
     .D(D), 
     .DA(DA_w), 
     .A(A), 
@@ -42,7 +42,7 @@ module datapath(
     .clk(clk_main)
     );
 	 
-	 ALU instance_name (
+	 ALU alu (
     .A(A), 
     .B(B), 
     .FS(FS),

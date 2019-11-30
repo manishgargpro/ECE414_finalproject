@@ -30,26 +30,26 @@ module ALU(
 	 always @(*)
 		begin
 			case (FS)
-				4'b0000 : num_out = A + B;
-				4'b0001 : num_out = A - B;
-				4'b0010 : num_out = A && B;
-				4'b0011 : num_out = A || B;
-				4'b0100 : num_out = A ^ B;
-				4'b0101 : num_out = ~A;
-				4'b0110 : num_out = A<<0;
-				4'b0111 : num_out = A>>0;
-				4'b1000 : num_out = num_out;
-				4'b1001 : num_out = num_out;
-				4'b1010 : num_out = num_out;
-				4'b1011 : num_out = A;
-				4'b1100 : num_out = A;
-				4'b1101 : num_out = num_out;
-				4'b1110 : num_out = num_out;
-				4'b1111 : num_out = A;
-				default : num_out = num_out;
+				4'b0000 : num_out <= A + B;
+				4'b0001 : num_out <= A - B;
+				4'b0010 : num_out <= A && B;
+				4'b0011 : num_out <= A || B;
+				4'b0100 : num_out <= A ^ B;
+				4'b0101 : num_out <= ~A;
+				4'b0110 : num_out <= A<<0;
+				4'b0111 : num_out <= A>>0;
+				4'b1000 : num_out <= num_out;
+				4'b1001 : num_out <= num_out;
+				4'b1010 : num_out <= num_out;
+				4'b1011 : num_out <= A;
+				4'b1100 : num_out <= A;
+				4'b1101 : num_out <= num_out;
+				4'b1110 : num_out <= num_out;
+				4'b1111 : num_out <= A;
+				default : num_out <= num_out;
 			endcase
 			if (num_out == 4'b0000)
-				z = 1;
+				z <= 1;
 		end
 
 endmodule

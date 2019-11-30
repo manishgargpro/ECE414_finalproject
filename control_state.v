@@ -28,9 +28,9 @@ module control_state(
 	 always @(posedge clk_main)
 		begin
 			if (reset)
-				next_state = 1'b0;
+				next_state <= 1'b0;
 			else
-				next_state = NS;
+				next_state <= NS;
 		end
 
 

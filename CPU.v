@@ -39,7 +39,7 @@ module CPU(
 	 
 	 wire Z_w, MB_w, MM_w, MD_w, RW_w;
 	 
-	 control_path instance_name (
+	 control_path c_p (
     .clk_main(clk_main), 
     .reset(reset), 
     .Z(Z_w), 
@@ -57,7 +57,7 @@ module CPU(
     .RW(RW_w)
     );
 	 
-	 datapath instance_name (
+	 datapath d_p (
     .clk_main(clk_main), 
     .reset(reset), 
     .DR(DR_w), 

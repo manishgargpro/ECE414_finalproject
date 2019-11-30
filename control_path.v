@@ -31,7 +31,7 @@ module control_path(
 	 
 	 wire NS_w, state_w, IL_w, PS_w;
 	 
-	 program_counter instance_name (
+	 program_counter PC (
     .PS(PS_w), 
     .A(BusA), 
     .offset(offset), 
@@ -40,7 +40,7 @@ module control_path(
     .PC(PC)
     );
 	 
-	 instruct_reg instance_name (
+	 instruct_reg IR (
     .clk_main(clk_main), 
     .reset(reset), 
     .IL(IL_w), 
@@ -51,14 +51,14 @@ module control_path(
     .SB(SB)
     );
 	 
-	 control_state instance_name (
+	 control_state CS (
     .clk_main(clk_main), 
     .reset(reset), 
     .NS(NS_w), 
     .next_state(state_w)
     );
 	 
-	 control_logic instance_name (
+	 control_logic CL (
     .state(state_w), 
     .opcode(opcode_w), 
     .Z(Z),

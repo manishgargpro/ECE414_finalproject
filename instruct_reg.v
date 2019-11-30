@@ -29,26 +29,26 @@ module instruct_reg(
 		begin
 			if (reset)
 				begin
-					opcode = 4'b0;
-					DR = 4'b0;
-					SA = 4'b0;
-					SB = 4'b0;
+					opcode <= 4'b0;
+					DR <= 4'b0;
+					SA <= 4'b0;
+					SB <= 4'b0;
 				end
 			else
 				begin
 					if (IL)
 						begin
-							opcode = ins[15:12];
-							DR = ins[11:8];
-							SA = ins[7:4];
-							SB = ins[3:0];
+							opcode <= ins[15:12];
+							DR <= ins[11:8];
+							SA <= ins[7:4];
+							SB <= ins[3:0];
 						end
 					else
 						begin
-							opcode = opcode;
-							DR = DR;
-							SA = SA;
-							SB = SB;
+							opcode <= opcode;
+							DR <= DR;
+							SA <= SA;
+							SB <= SB;
 						end
 				end
 		end
