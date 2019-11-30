@@ -23,8 +23,9 @@ module datapath(
     input [3:0] DR, SA, SB,
 	 input [3:0] FS,
 	 input [5:0] PC,
-    input MB, MM, MD, MW, RW,
-    output [15:0] BusA, AddrOut, DataOut,
+    input MB, MM, MD, RW,
+    output [15:0] BusA, DataOut,
+	 output [5:0] AddrOut,
     output Z
     );
 	 

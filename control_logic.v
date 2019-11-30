@@ -67,7 +67,7 @@ module control_logic(
 						begin
 							case (opcode[2:0] == 3'b000)
 								3'b000 :
-									begin
+									begin //load immediate
 										PS = 2'b01;
 										MB = 1'b1;
 										MD = 1'b0;
@@ -76,7 +76,7 @@ module control_logic(
 										MW = 1'b0;
 									end
 								3'b001 :
-									begin
+									begin //load word from memory
 										PS = 2'b01;
 										MB = 1'b0;
 										MD = 1'b1;
@@ -85,7 +85,7 @@ module control_logic(
 										MW = 1'b0;
 									end
 								3'b010 :
-									begin
+									begin //store word to memory
 										PS = 2'b01;
 										MB = 1'b0;
 										MD = 1'b0;
@@ -94,7 +94,7 @@ module control_logic(
 										MW = 1'b1;
 									end
 								3'b011 :
-									begin
+									begin //branch if z
 										PS = Z?2'b10:2'b01;
 										MB = 1'b0;
 										MD = 1'b0;
@@ -103,7 +103,7 @@ module control_logic(
 										MW = 1'b0;
 									end
 								3'b100 :
-									begin
+									begin //branch if not z
 										PS = Z?2'b01:2'b10;
 										MB = 1'b0;
 										MD = 1'b0;
@@ -112,7 +112,7 @@ module control_logic(
 										MW = 1'b0;
 									end
 								3'b101 :
-									begin
+									begin //store current pc value and then jump to an offset
 										PS = 2'b01;
 										MB = 1'b0;
 										MD = 1'b0;
@@ -121,7 +121,7 @@ module control_logic(
 										MW = 1'b0;
 									end
 								3'b110 :
-									begin
+									begin //jump to offset without storing current pc value
 										PS = 2'b10;
 										MB = 1'b0;
 										MD = 1'b0;
@@ -130,7 +130,7 @@ module control_logic(
 										MW = 1'b0;
 									end
 								3'b111 :
-									begin
+									begin //restore pc value to before (go back to program)
 										PS = 2'b11;
 										MB = 1'b0;
 										MD = 1'b0;
@@ -139,7 +139,7 @@ module control_logic(
 										MW = 1'b0;
 									end
 								default:
-									begin
+									begin //not sure what kind of situation this is
 										PS = 2'b00;
 										MB = 1'b0;
 										MD = 1'b0;

@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module control_path(
     input clk_main, reset, Z,
-    input [15:0] DataIn,
+    input [15:0] InstructIn,
     input [3:0] BusA,
     output [3:0] DR, SA, SB, FS,
 	 output [5:0] PC,
@@ -44,7 +44,7 @@ module control_path(
     .clk_main(clk_main), 
     .reset(reset), 
     .IL(IL_w), 
-    .ins(DataIn), 
+    .ins(InstructIn), 
     .opcode(opcode_w), 
     .DR(DR), 
     .SA(SA), 
