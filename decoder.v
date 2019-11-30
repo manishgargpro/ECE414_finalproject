@@ -2,12 +2,11 @@
 
 module decoder(
     input [15:0] in,
-    input clk,
     output reg [3:0] opcode, dr, sa, sb,
 	 output reg [7:0] immediate
     );
 	 
-	 always @(posedge clk) begin
+	 always @(in) begin
 		// ADD SUB AND OR XOR NOT SLA SRA LW SW
 		if ((in[15:12] >= 4'b0000 && in[15:12] <= 4'b0111) || in[15:12] == 4'b1001 || in[15:12] == 4'b1010) begin
 			opcode <= in[15:12];
