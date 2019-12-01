@@ -19,49 +19,35 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module datapath(
-    input clk_main,
-    input reset,
-    input [2:0] DR,
-    input [2:0] SA,
-    input [2:0] SB,
-    input [3:0] AX,
-    input [3:0] BX,
-    input [3:0] DX,
-    input [3:0] FS,
-    input MB,
-    input MM,
-    input MD,
-	 input MW,
-    input BusA,
-    input [nbit-1:0] DataOut,
-    output V,
-    output C,
-    output N,
+    input clk_main, reset,
+    input [3:0] DR, SA, SB,
+	 input [3:0] FS,
+	 input [5:0] PC,
+    input MB, MM, MD, RW,
+    output [15:0] BusA, DataOut,
+	 output [5:0] AddrOut,
     output Z
     );
 	 
-	 parameter nbit = 16;
+	 register_file RF (
+    .D(D), 
+    .DA(DA_w), 
+    .A(A), 
+    .AA(AA_w), 
+    .B(B), 
+    .BA(BA_w), 
+    .RW(RW), 
+    .rst(reset), 
+    .EN(EN), 
+    .clk(clk_main)
+    );
 	 
-	 MUX_2to1 MUXB (
-    .In0(In0), 
-    .In1(In1), 
-    .S(MB), 
-    .Out(Out)
+	 ALU alu (
+    .A(A), 
+    .B(B), 
+    .FS(FS),
+    .num_out(num_out),
+    .z(z)
     );
-
-	MUX_2to1 MUXM (
-    .In0(In0), 
-    .In1(In1), 
-    .S(MM), 
-    .Out(Out)
-    );
-
-	MUX_2to1 MUXD (
-    .In0(In0), 
-    .In1(In1), 
-    .S(MD), 
-    .Out(Out)
-    );
-
 
 endmodule
