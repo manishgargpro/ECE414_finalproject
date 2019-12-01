@@ -11,30 +11,28 @@ module register_file(
 integer i;
 reg [15:0] regFile [15:0];
 
-always @ (posedge clk, posedge rst) begin 
-	if (en == 1) begin
-		if (rst == 1) begin 
-			for (i = 0; i < 16; i = i + 1)
-				regFile [i] = 16'b0; 
-			A = 16'bx;
-		end
-		else if (rst == 0) begin
-			case (RW)
-			//2'b00: begin end
-			1'b0: begin // Read only
-				
-				A = regFile [AA];
-				B = regFile [BA];
-			end
-			1'b1: begin // read and write
-				A = regFile [AA];
-				B = regFile [BA];
-				regFile [DA] = D;
-			end 
+always @ (posedge clk) begin
+	if (rst == 1) begin 
+		for (i = 0; i < 16; i = i + 1)
+			regFile [i] = 16'b0; 
+		A = 16'bx;
+	end
+	else if (rst == 0) begin
+		case (RW)
+		//2'b00: begin end
+		1'b0: begin // Read only
 			
-			default: begin end
-			endcase
+			A = regFile [AA];
+			B = regFile [BA];
 		end
+		1'b1: begin // read and write
+			A = regFile [AA];
+			B = regFile [BA];
+			regFile [DA] = D;
+		end 
+		
+		default: begin end
+		endcase
 	end
 end
 endmodule

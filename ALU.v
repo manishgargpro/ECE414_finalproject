@@ -22,7 +22,7 @@ module ALU(
     input [15:0] A,
     input [15:0] B,
     input [3:0] FS,
-	 output reg [nbit - 1:0] num_out,
+	 output reg [15:0] num_out,
 	 output reg z
     );
 	 
@@ -38,7 +38,7 @@ module ALU(
 				4'b0101 : num_out <= ~A;
 				4'b0110 : num_out <= A<<0;
 				4'b0111 : num_out <= A>>0;
-				4'b1000 : num_out <= num_out;
+				4'b1000 : num_out <= B;
 				4'b1001 : num_out <= num_out;
 				4'b1010 : num_out <= num_out;
 				4'b1011 : num_out <= A;

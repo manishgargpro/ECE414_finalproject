@@ -31,7 +31,7 @@ module control_path(
 	 
 	 wire NS_w, state_w, IL_w, PS_w;
 	 
-	 program_counter PC (
+	 program_counter pc (
     .PS(PS_w), 
     .A(BusA), 
     .offset(offset), 

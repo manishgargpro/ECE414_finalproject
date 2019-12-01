@@ -30,7 +30,7 @@ module control_state(
 			if (reset)
 				next_state <= 1'b0;
 			else
-				next_state <= NS;
+				next_state <= ~NS;
 		end
 
 

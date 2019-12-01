@@ -60,6 +60,7 @@ module CPU(
 	 datapath d_p (
     .clk_main(clk_main), 
     .reset(reset), 
+	 .DataIn(data_from_rom),
     .DR(DR_w), 
     .SA(SA_w), 
     .SB(SB_w), 

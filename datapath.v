@@ -20,6 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module datapath(
     input clk_main, reset,
+	 input [15:0] DataIn,
     input [3:0] DR, SA, SB,
 	 input [3:0] FS,
 	 input [5:0] PC,
@@ -29,25 +30,40 @@ module datapath(
     output Z
     );
 	 
+	 wire [15:0] A_w, B1_w, B2_w, D_w, F_w;
+	 
 	 register_file RF (
-    .D(D), 
-    .DA(DA_w), 
-    .A(A), 
-    .AA(AA_w), 
-    .B(B), 
-    .BA(BA_w), 
+    .D(D_w), 
+    .DA(DR), 
+    .A(A_w), 
+    .AA(SA), 
+    .B(B1_w), 
+    .BA(SB), 
     .RW(RW), 
     .rst(reset), 
-    .EN(EN), 
     .clk(clk_main)
     );
 	 
+	 mux2_16 muxB (
+    .in0(B1_w), 
+    .in1({8'b0,SA,SB}), 
+    .sel(MB), 
+    .out(B2_w)
+    );
+	 
 	 ALU alu (
-    .A(A), 
-    .B(B), 
+    .A(A_w), 
+    .B(B2_w), 
     .FS(FS),
-    .num_out(num_out),
-    .z(z)
+    .num_out(F_w),
+    .z(Z)
+    );
+	 
+	 mux2_16 muxD (
+    .in0(F_w), 
+    .in1(DataIn), 
+    .sel(MD), 
+    .out(D_w)
     );
 
 endmodule

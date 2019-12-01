@@ -34,11 +34,10 @@ module control_logic(
 	 
 	 //THIS MODULE IS NOT FINISHED, I DON'T KNOW WHAT I'M DOING!!!
 	 
-	 assign NS = state;
-	 assign FS = opcode;
-	 
 	 always @(*)
 		begin
+			NS <= state;
+			FS <= opcode;
 			if (state == 1'b0)
 				begin
 					PS <= 2'b00;
@@ -51,7 +50,7 @@ module control_logic(
 				end
 			else if (state == 1'b1)
 				begin
-					IL = 1'b0;
+					IL <= 1'b0;
 					if (opcode[3] == 1'b0)
 						begin
 							PS <= 2'b01;
@@ -63,7 +62,7 @@ module control_logic(
 						end
 					else if (opcode[3] == 1'b1)
 						begin
-							case (opcode[2:0] == 3'b000)
+							case (opcode[2:0])
 								3'b000 :
 									begin //load immediate
 										PS <= 2'b01;
