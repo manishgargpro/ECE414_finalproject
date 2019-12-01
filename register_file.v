@@ -48,7 +48,7 @@ input  [3:0]  DA,
 
               BA; 
 
-input  [1:0] RW;
+  input  [0:0] RW;
 
        //WR; 
 
@@ -98,26 +98,29 @@ begin
    begin 
 //{RD,WR}
    case (RW) 
+   /* 2'b00: begin
+   
+    end*/
 
-    2'b00:  begin 
-
-     end 
-
-    2'b01:  begin //If Write only 
-
-     regFile [DA] = D; 
-
-     end 
-
-    2'b10:  begin //If Read only 
-
+    1'b0:  begin //If Read only 
+      
      A = regFile [AA]; 
 
      B = regFile [BA]; 
 
      end 
 
-    2'b11:  begin //If both active 
+    1'b1:  begin //If Read and write 
+
+     A = regFile [AA]; 
+
+     B = regFile [BA]; 
+      
+     regFile [DA] = D;
+
+     end 
+
+   /* 2'b11:  begin //If both active 
 
      A = regFile [AA]; 
 
@@ -125,7 +128,7 @@ begin
 
      regFile [DA] = D; 
 
-     end 
+     end */
 
     default: begin //If undefined 
 
