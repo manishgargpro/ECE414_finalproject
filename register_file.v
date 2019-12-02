@@ -3,8 +3,7 @@
 module register_file(
 	input [15:0] D,
 	input [3:0] DA, AA, BA,
-	input [0:0] RW,
-	input en, rst, clk,
+	input reset, clk, RW,
 	output reg[15:0] A, B
 	);
 
@@ -12,16 +11,14 @@ integer i;
 reg [15:0] regFile [15:0];
 
 always @ (posedge clk) begin
-	if (rst == 1) begin 
+	if (reset == 1) begin 
 		for (i = 0; i < 16; i = i + 1)
-			regFile [i] = 16'b0; 
+			regFile [i] = 16'b0;
 		A = 16'bx;
-	end
-	else if (rst == 0) begin
+		B = 16'bx;
+	end else if (reset == 0) begin
 		case (RW)
-		//2'b00: begin end
 		1'b0: begin // Read only
-			
 			A = regFile [AA];
 			B = regFile [BA];
 		end
@@ -29,10 +26,12 @@ always @ (posedge clk) begin
 			A = regFile [AA];
 			B = regFile [BA];
 			regFile [DA] = D;
-		end 
-		
+		end
 		default: begin end
 		endcase
+	end else begin
+		A = 16'bx;
+		B = 16'bx;
 	end
 end
 endmodule

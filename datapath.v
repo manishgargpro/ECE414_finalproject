@@ -1,23 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    18:08:43 11/26/2019 
-// Design Name: 
-// Module Name:    datapath 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
-//
-// Dependencies: 
-//
-// Revision: 
-// Revision 0.01 - File Created
-// Additional Comments: 
-//
-//////////////////////////////////////////////////////////////////////////////////
+
 module datapath(
     input clk_main, reset,
 	 input [15:0] DataIn,
@@ -84,4 +66,17 @@ module datapath(
     .out(AddrOut)
     );*/
 
+	mux2_16 muxD(
+		.in0(F_w), 
+		.in1(DataIn), 
+		.sel(MD), 
+		.out(D_w)
+	);
+	
+	mux2_16 muxM(
+		.in0(A_w),
+		.in1({10'b0,PC}),
+		.sel(MM),
+		.out(AddrOut)
+	);
 endmodule
