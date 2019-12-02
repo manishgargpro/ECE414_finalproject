@@ -111,10 +111,10 @@ always @(*) begin
 					MP <= 1'b0;
 				end
 			3'b111 :
-				begin //end of execution
-					if (eoe == 1111)
-						begin
-							PS <= 2'b00;
+				begin
+					if (eoe == 4'b0000)
+						begin //restore pc value to before (go back to program)
+							PS <= 2'b11;
 							MB <= 1'b0;
 							MD <= 1'b0;
 							RW <= 1'b0;
@@ -122,9 +122,9 @@ always @(*) begin
 							MW <= 1'b0;
 							MP <= 1'b0;
 						end
-					else
-						begin //restore pc value to before (go back to program)
-							PS <= 2'b11;
+					else if (eoe == 4'b1111)
+						begin //end of execution
+							PS <= 2'b00;
 							MB <= 1'b0;
 							MD <= 1'b0;
 							RW <= 1'b0;
@@ -149,16 +149,18 @@ always @(*) begin
 			MB <= 1'b0;
 			MD <= 1'b0;
 			RW <= 1'b0;
-			MM <= 1'b0;
+			//MM <= 1'b0;
 			MW <= 1'b0;
+			MP <= 1'b0;
 		end
 	end else begin // Removing warnings
 		PS <= 2'b00;
 		MB <= 1'b0;
 		MD <= 1'b0;
 		RW <= 1'b0;
-		MM <= 1'b0;
+		//MM <= 1'b0;
 		MW <= 1'b0;
+		MP <= 1'b0;
 	end
 end
 

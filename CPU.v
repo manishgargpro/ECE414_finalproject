@@ -21,6 +21,8 @@ module CPU(
 	 
 	 wire Z_w, MB_w, /*MM_w,*/ MD_w, RW_w, MP_w;
 	 
+	 assign address_to_rom = PC_w;
+	 
 	 control_path c_p (
     .clk_main(clk_main), 
     .reset(reset), 
@@ -43,7 +45,7 @@ module CPU(
 	 datapath d_p (
     .clk_main(clk_main), 
     .reset(reset), 
-	 .DataIn(data_ram),
+	 .DataIn(data_from_ram),
     .DR(DR_w), 
     .SA(SA_w), 
     .SB(SB_w), 
@@ -56,7 +58,7 @@ module CPU(
     .RW(RW_w), 
     .BusA(BusA_w), //and this one
     .AddrOut(address_to_ram), //and this one
-    .DataOut(data_ram), //and this one
+    .DataOut(data_to_ram), //and this one
     .Z(Z_w)
 	 );
 

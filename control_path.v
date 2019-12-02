@@ -3,10 +3,10 @@
 module control_path(
     input clk_main, reset, Z,
     input [15:0] InstructIn,
-	 input [5:0] BusA,
+	 input [15:0] BusA,
     output [3:0] DR, SA, SB, FS,
 	 output [5:0] PC,
-    output MB, MM, MD, MW, RW, MP
+    output MB, /*MM,*/ MD, MW, RW, MP
     );
 	 
 	 wire [3:0] opcode_w;
@@ -16,7 +16,7 @@ module control_path(
 	 
 	 program_counter pc (
 		 .PS(PS_w), 
-		 .A(BusA),
+		 .A(BusA[5:0]),
 		 .clk_main(clk_main), 
 		 .reset(reset), 
 		 .PC(PC),

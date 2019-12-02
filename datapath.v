@@ -33,7 +33,7 @@ module datapath(
     .B(B1_w), 
     .BA(SB), 
     .RW(RW), 
-    .rst(reset), 
+    .reset(reset), 
     .clk(clk_main)
     );
 	 
@@ -66,17 +66,4 @@ module datapath(
     .out(AddrOut)
     );*/
 
-	mux2_16 muxD(
-		.in0(F_w), 
-		.in1(DataIn), 
-		.sel(MD), 
-		.out(D_w)
-	);
-	
-	mux2_16 muxM(
-		.in0(A_w),
-		.in1({10'b0,PC}),
-		.sel(MM),
-		.out(AddrOut)
-	);
 endmodule

@@ -16,8 +16,8 @@ always @(posedge clk_main)
 			case(PS)
 			2'b00: begin PC <= PC; end
 			2'b01: begin PC <= PC + 1'b1; end
-			2'b10: begin PC <= PC +({SA, SB})+1'b1; end
-			2'b11: begin PC <= PC + A; end
+			2'b10: begin PC <= PC +({SA[1:0], SB})+1'b1; end
+			2'b11: begin PC <= A; end
 			endcase
 		end
 	end
