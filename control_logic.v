@@ -36,7 +36,7 @@ always @(*) begin
 			MW <= 1'b0;
 		end else if (opcode[3] == 1'b1) begin
 			case (opcode[2:0])
-			3'b000 :
+			3'b000:
 				begin //load immediate
 					PS <= 2'b01;
 					MB <= 1'b1;
@@ -45,7 +45,7 @@ always @(*) begin
 					MM <= 1'b0;
 					MW <= 1'b0;
 				end
-			3'b001 :
+			3'b001:
 				begin //load word from memory
 					PS <= 2'b01;
 					MB <= 1'b0;
@@ -54,7 +54,7 @@ always @(*) begin
 					MM <= 1'b0;
 					MW <= 1'b0;
 				end
-			3'b010 :
+			3'b010:
 				begin //store word to memory
 					PS <= 2'b01;
 					MB <= 1'b0;
@@ -63,7 +63,7 @@ always @(*) begin
 					MM <= 1'b0;
 					MW <= 1'b1;
 				end
-			3'b011 :
+			3'b011:
 				begin //branch if z
 					PS <= Z?2'b10:2'b01;
 					MB <= 1'b0;
@@ -72,7 +72,7 @@ always @(*) begin
 					MM <= 1'b0;
 					MW <= 1'b0;
 				end
-			3'b100 :
+			3'b100:
 				begin //branch if not z
 					PS <= Z?2'b01:2'b10;
 					MB <= 1'b0;
@@ -81,7 +81,7 @@ always @(*) begin
 					MM <= 1'b0;
 					MW <= 1'b0;
 				end
-			3'b101 :
+			3'b101:
 				begin //store current pc value and then jump to an offset
 					PS <= 2'b01;
 					MB <= 1'b0;
@@ -90,7 +90,7 @@ always @(*) begin
 					MM <= 1'b0;
 					MW <= 1'b0;
 				end
-			3'b110 :
+			3'b110:
 				begin //jump to offset without storing current pc value
 					PS <= 2'b10;
 					MB <= 1'b0;
@@ -99,7 +99,7 @@ always @(*) begin
 					MM <= 1'b0;
 					MW <= 1'b0;
 				end
-			3'b111 :
+			3'b111:
 				begin //restore pc value to before (go back to program)
 					PS <= 2'b11;
 					MB <= 1'b0;
@@ -118,7 +118,21 @@ always @(*) begin
 					MW <= 1'b0;
 				end
 			endcase
+		end else begin // Removing warnings
+			PS <= 2'b00;
+			MB <= 1'b0;
+			MD <= 1'b0;
+			RW <= 1'b0;
+			MM <= 1'b0;
+			MW <= 1'b0;
 		end
+	end else begin // Removing warnings
+		PS <= 2'b00;
+		MB <= 1'b0;
+		MD <= 1'b0;
+		RW <= 1'b0;
+		MM <= 1'b0;
+		MW <= 1'b0;
 	end
 end
 
