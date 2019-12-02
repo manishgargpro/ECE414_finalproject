@@ -39,8 +39,8 @@ module ALU(
 				4'b0110 : num_out <= A<<0;
 				4'b0111 : num_out <= A>>0;
 				4'b1000 : num_out <= B;
-				4'b1001 : num_out <= num_out;
-				4'b1010 : num_out <= num_out;
+				4'b1001 : num_out <= B;
+				4'b1010 : num_out <= B;
 				4'b1011 : num_out <= A;
 				4'b1100 : num_out <= A;
 				4'b1101 : num_out <= num_out;

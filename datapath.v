@@ -24,16 +24,27 @@ module datapath(
     input [3:0] DR, SA, SB,
 	 input [3:0] FS,
 	 input [5:0] PC,
-    input MB, MM, MD, RW,
+    input MB, /*MM,*/ MD, RW, MP,
     output [15:0] BusA, DataOut,
 	 output [5:0] AddrOut,
     output Z
     );
 	 
-	 wire [15:0] A_w, B1_w, B2_w, D_w, F_w;
+	 wire [15:0] A_w, B1_w, B2_w, D_w, F_w, P_w;
+	 
+	 assign DataOut = B2_w;
+	 
+	 assign AddrOut = A_w[5:0];
+	 
+	 mux2_16 muxP (
+    .in0(D_w), 
+    .in1({10'b0,PC}), 
+    .sel(MP), 
+    .out(P_w)
+    );
 	 
 	 register_file RF (
-    .D(D_w), 
+    .D(P_w), 
     .DA(DR), 
     .A(A_w), 
     .AA(SA), 
@@ -65,5 +76,12 @@ module datapath(
     .sel(MD), 
     .out(D_w)
     );
+	 
+	 /*mux2_16 muxM (
+    .in0(A_w), 
+    .in1(PC), 
+    .sel(MM), 
+    .out(AddrOut)
+    );*/
 
 endmodule

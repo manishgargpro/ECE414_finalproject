@@ -6,7 +6,7 @@ module control_path(
     input [3:0] BusA,
     output [3:0] DR, SA, SB, FS,
 	 output [5:0] PC,
-    output MB, MM, MD, MW, RW
+    output MB, MM, MD, MW, RW, MP
     );
 	 
 	 wire [3:0] opcode_w;
@@ -44,6 +44,7 @@ module control_path(
 	 control_logic CL (
     .state(state_w), 
     .opcode(opcode_w),
+	 .eoe(InstructIn[11:8]),
     .Z(Z),
     .NS(NS_w),
     .PS(PS_w),
@@ -52,8 +53,9 @@ module control_path(
     .FS(FS),
     .MD(MD),
     .RW(RW),
-    .MM(MM),
-    .MW(MW)
+    //.MM(MM),
+    .MW(MW),
+	 .MP(MP)
     );
 
 

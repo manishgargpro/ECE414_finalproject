@@ -21,10 +21,10 @@
 module CPU(
     input clk_main,
     input reset,
-    input [15:0] data_from_rom, //used
+    input [15:0] data_from_rom, data_from_ram, //used
     output [5:0] address_to_rom,
     output enable_to_rom,
-    inout [15:0] data_ram, //used
+    output [15:0] data_to_ram, //used
     output write_enable_to_ram, //used
     output read_enable_to_ram,
     output [5:0] address_to_ram, //used
@@ -37,7 +37,7 @@ module CPU(
 	 
 	 wire [5:0] PC_w;
 	 
-	 wire Z_w, MB_w, MM_w, MD_w, RW_w;
+	 wire Z_w, MB_w, /*MM_w,*/ MD_w, RW_w, MP_w;
 	 
 	 control_path c_p (
     .clk_main(clk_main), 
@@ -51,8 +51,9 @@ module CPU(
     .FS(FS_w), 
     .PC(PC_w), 
     .MB(MB_w), 
-    .MM(MM_w), 
+    //.MM(MM_w), 
     .MD(MD_w), 
+	 .MP(MP_w),
     .MW(write_enable_to_ram), //and this one (I think...)
     .RW(RW_w)
     );
@@ -60,15 +61,16 @@ module CPU(
 	 datapath d_p (
     .clk_main(clk_main), 
     .reset(reset), 
-	 .DataIn(data_from_rom),
+	 .DataIn(data_ram),
     .DR(DR_w), 
     .SA(SA_w), 
     .SB(SB_w), 
     .FS(FS_w), 
     .PC(PC_w), 
     .MB(MB_w), 
-    .MM(MM_w), 
+    //.MM(MM_w), 
     .MD(MD_w), 
+	 .MP(MP_w),
     .RW(RW_w), 
     .BusA(BusA_w), //and this one
     .AddrOut(address_to_ram), //and this one
