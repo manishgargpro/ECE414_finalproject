@@ -1,23 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    02:53:41 11/28/2019 
-// Design Name: 
-// Module Name:    control_path 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
-//
-// Dependencies: 
-//
-// Revision: 
-// Revision 0.01 - File Created
-// Additional Comments: 
-//
-//////////////////////////////////////////////////////////////////////////////////
+
 module control_path(
     input clk_main, reset, Z,
     input [15:0] InstructIn,
@@ -28,13 +10,14 @@ module control_path(
     );
 	 
 	 wire [3:0] opcode_w;
+	 wire [1:0] PS_w;
 	 
-	 wire NS_w, state_w, IL_w, PS_w;
+	 wire NS_w, state_w, IL_w;
 	 
 	 program_counter pc (
     .PS(PS_w), 
-    .A(BusA), 
-    .offset(offset), 
+    .A(BusA),
+    .offset(offset),
     .clk_main(clk_main), 
     .reset(reset), 
     .PC(PC)
@@ -60,16 +43,16 @@ module control_path(
 	 
 	 control_logic CL (
     .state(state_w), 
-    .opcode(opcode_w), 
+    .opcode(opcode_w),
     .Z(Z),
-    .NS(NS_w), 
-    .PS(PS_w), 
-    .IL(IL_w), 
-    .MB(MB), 
-    .FS(FS), 
-    .MD(MD), 
-    .RW(RW), 
-    .MM(MM), 
+    .NS(NS_w),
+    .PS(PS_w),
+    .IL(IL_w),
+    .MB(MB),
+    .FS(FS),
+    .MD(MD),
+    .RW(RW),
+    .MM(MM),
     .MW(MW)
     );
 

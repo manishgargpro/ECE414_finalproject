@@ -1,27 +1,5 @@
 `timescale 1ns / 1ps
 
-////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer:
-//
-// Create Date:   13:41:13 12/01/2019
-// Design Name:   CPU
-// Module Name:   C:/Users/manis/Desktop/Coding_stuff/NewGithubRepos/ECE414_finalproject/tb_CPU.v
-// Project Name:  finalproject
-// Target Device:  
-// Tool versions:  
-// Description: 
-//
-// Verilog Test Fixture created by ISE for module: CPU
-//
-// Dependencies:
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-////////////////////////////////////////////////////////////////////////////////
-
 module tb_CPU;
 
 	// Inputs
