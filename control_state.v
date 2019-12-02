@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    19:38:00 08/27/2019 
+// Create Date:    03:03:00 11/28/2019 
 // Design Name: 
-// Module Name:    MUX_2to1 
+// Module Name:    control_state 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,19 +18,20 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module MUX_2to1(
-    input In0,
-	 input In1,
-    input S,
-    output Out
+module control_state(
+    input clk_main,
+    input reset,
+    input NS,
+    output reg next_state
     );
 	 
-	 wire	x, y, z;				//Wires are defined
-	 
-	 and(x, In1, S);		//AND gate #1
-	 not(z, S);					//NOT gate
-	 and(y, In0, z);		//AND gate #2
-	 or(Out, x, y);			//OR gate
+	 always @(posedge clk_main)
+		begin
+			if (reset)
+				next_state <= 1'b0;
+			else
+				next_state <= ~NS;
+		end
 
 
 endmodule

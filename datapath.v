@@ -19,49 +19,51 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module datapath(
-    input clk_main,
-    input reset,
-    input [2:0] DR,
-    input [2:0] SA,
-    input [2:0] SB,
-    input [3:0] AX,
-    input [3:0] BX,
-    input [3:0] DX,
-    input [3:0] FS,
-    input MB,
-    input MM,
-    input MD,
-	 input MW,
-    input BusA,
-    input [nbit-1:0] DataOut,
-    output V,
-    output C,
-    output N,
+    input clk_main, reset,
+	 input [15:0] DataIn,
+    input [3:0] DR, SA, SB,
+	 input [3:0] FS,
+	 input [5:0] PC,
+    input MB, MM, MD, RW,
+    output [15:0] BusA, DataOut,
+	 output [5:0] AddrOut,
     output Z
     );
 	 
-	 parameter nbit = 16;
+	 wire [15:0] A_w, B1_w, B2_w, D_w, F_w;
 	 
-	 MUX_2to1 MUXB (
-    .In0(In0), 
-    .In1(In1), 
-    .S(MB), 
-    .Out(Out)
+	 register_file RF (
+    .D(D_w), 
+    .DA(DR), 
+    .A(A_w), 
+    .AA(SA), 
+    .B(B1_w), 
+    .BA(SB), 
+    .RW(RW), 
+    .rst(reset), 
+    .clk(clk_main)
     );
-
-	MUX_2to1 MUXM (
-    .In0(In0), 
-    .In1(In1), 
-    .S(MM), 
-    .Out(Out)
+	 
+	 mux2_16 muxB (
+    .in0(B1_w), 
+    .in1({8'b0,SA,SB}), 
+    .sel(MB), 
+    .out(B2_w)
     );
-
-	MUX_2to1 MUXD (
-    .In0(In0), 
-    .In1(In1), 
-    .S(MD), 
-    .Out(Out)
+	 
+	 ALU alu (
+    .A(A_w), 
+    .B(B2_w), 
+    .FS(FS),
+    .num_out(F_w),
+    .z(Z)
     );
-
+	 
+	 mux2_16 muxD (
+    .in0(F_w), 
+    .in1(DataIn), 
+    .sel(MD), 
+    .out(D_w)
+    );
 
 endmodule

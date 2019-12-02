@@ -20,8 +20,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 module program_counter(
     input [1:0] PS,
-    input A,
-    input offset,
+    input [3:0] A,
+    input [3:0] offset,
 	 input clk_main,
 	 input reset,
 	 output reg [5:0] PC
