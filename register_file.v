@@ -2,7 +2,7 @@
 
 module register_file(
 	input [15:0] D,
-	input [3:0] DA, AA, BA,
+	input [3:0] DA, AA, BA, FS,
 	input reset, clk, RW,
 	output [15:0] A, B
 	);
@@ -10,7 +10,7 @@ module register_file(
 integer i;
 reg [15:0] regFile [15:0];
 
-assign A = regFile [AA];
+assign A = (FS == 4'b1011 || FS == 4'b1100) ? regFile [DA] : regFile [AA];
 assign B = regFile [BA];
 
 always @ (posedge clk) begin

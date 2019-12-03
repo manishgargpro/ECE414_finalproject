@@ -21,7 +21,7 @@ always @(*) begin
 	FS <= opcode;
 	if (state == 1'b0) begin
 		PS <= 2'b00;
-		IL <= 1'b1;
+		IL <= 1'b0;
 		MB <= 1'b0;
 		MD <= 1'b0;
 		RW <= 1'b0;
@@ -29,7 +29,7 @@ always @(*) begin
 		MW <= 1'b0;
 		MP <= 1'b0;
 	end else if (state == 1'b1) begin
-		IL <= 1'b0;
+		IL <= 1'b1;
 		if (opcode[3] == 1'b0) begin
 			PS <= 2'b01;
 			MB <= 1'b0;
@@ -92,7 +92,7 @@ always @(*) begin
 				end
 			3'b101:
 				begin //store current pc value and then jump to an offset
-					PS <= 2'b01;
+					PS <= 2'b10;
 					MB <= 1'b0;
 					MD <= 1'b0;
 					RW <= 1'b1;

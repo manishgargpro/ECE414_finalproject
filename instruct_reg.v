@@ -6,7 +6,7 @@ module instruct_reg(
 	output reg [3:0] opcode, DR, SA, SB
 	);
 
-always @(posedge clk_main) begin
+always @(negedge clk_main) begin
 	if (reset) begin
 		opcode <= 4'b0;
 		DR <= 4'b0;

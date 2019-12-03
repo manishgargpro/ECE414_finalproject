@@ -10,7 +10,8 @@ module CPU(
     output write_enable_to_ram, //used
     output read_enable_to_ram, //used
     output [5:0] address_to_ram, //used
-    output enable_ram_read //used
+    output enable_ram_read, //used
+	 output [7:0] eoe
     );
 	 
 	 wire [15:0] Addr_w;
@@ -30,6 +31,8 @@ module CPU(
 	 assign enable_ram_read = ({FS_w,DR_w} == 8'b11111111)?1'b1:1'b0;
 	 
 	 assign address_to_ram = Addr_w[5:0];
+	 
+	 assign eoe = {FS_w,DR_w};
 	 
 	 control_path c_p (
     .clk_main(clk_main), 

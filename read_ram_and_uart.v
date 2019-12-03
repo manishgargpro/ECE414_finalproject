@@ -22,6 +22,7 @@ module read_ram_and_uart(
     input clk,
     input reset,
 	 input [15:0] data_from_ram,
+	 input [7:0] eoe,
 	 output read_enable_to_ram,
 	 output [5:0] address_to_ram, 
     output uart_TX
@@ -58,7 +59,8 @@ module read_ram_and_uart(
     .address_to_ram(address_to_ram),					//4bit
     .read_enable_to_ram(read_enable_to_ram),
     .uart_send(wr_uart_send),
-    .uart_data(wr_data_byte)								//8bit
+    .uart_data(wr_data_byte),								//8bit
+	 .eoe(eoe)
     );
 	 
 	 

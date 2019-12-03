@@ -27,6 +27,7 @@ module top_level(
     );
 
 		//address line
+		wire [7:0] eoe_w;
 		wire[5:0] wr_address_to_rom ;
 		wire [5:0] wr_read_address_to_ram_from_readout, wr_address_to_ram_from_cpu, wr_address_to_ram ;
 		
@@ -172,7 +173,8 @@ module top_level(
 	 .write_enable_to_ram(wr_write_to_ram_from_cpu),
 	 .address_to_ram(wr_address_to_ram_from_cpu),				//6bit
 	 .read_enable_to_ram(wr_read_enable_to_ram_from_cpu),
-	 .enable_ram_read(wr_enable_ram_read)							//enable ram read and uart module
+	 .enable_ram_read(wr_enable_ram_read),							//enable ram read and uart module
+	 .eoe(eoe_w)
     );
 
 	
@@ -212,7 +214,8 @@ module top_level(
 	 .data_from_ram(wr_data_from_ram),						//32bit
 	 .read_enable_to_ram(wr_read_ram),
 	 .address_to_ram(wr_read_address_to_ram_from_readout), 					//4bit
-    .uart_TX(UART_TX)
+    .uart_TX(UART_TX),
+	 .eoe(eoe_w)
     );
 		
 
