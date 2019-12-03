@@ -25,9 +25,9 @@ module CPU(
 	 
 	 assign enable_to_rom = 1'b1;
 	 
-	 assign read_enable_to_ram = 1'b1;
+	 assign read_enable_to_ram = (FS_w == 4'b1001)?1'b1:1'b0 || ({FS_w,DR_w} == 8'b11111111)?1'b1:1'b0;
 	 
-	 assign enable_ram_read = 1'b1/*({FS_w,DR_w} == 8'b11111111)?1'b1:1'b0*/;
+	 assign enable_ram_read = ({FS_w,DR_w} == 8'b11111111)?1'b1:1'b0;
 	 
 	 assign address_to_ram = Addr_w[5:0];
 	 

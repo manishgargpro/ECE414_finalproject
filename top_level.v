@@ -49,8 +49,8 @@ module top_level(
 		
 		assign wr_enable_ram = wr_read_enable_to_ram_from_cpu || wr_write_to_ram_from_cpu  || wr_read_ram ;											//enable ram 
 		
-		assign wr_address_to_ram =  ( wr_reset_read_ram ||  wr_read_enable_to_ram_from_cpu) ?  wr_address_to_ram_from_cpu : wr_read_address_to_ram_from_readout ; 			//address ram		// have to edit
-		//assign wr_address_to_ram =  wr_enable_ram_read ?  wr_read_address_to_ram_from_readout : wr_address_to_ram_from_cpu ;
+		//assign wr_address_to_ram =  ( wr_reset_read_ram ||  wr_read_enable_to_ram_from_cpu) ?  wr_address_to_ram_from_cpu : wr_read_address_to_ram_from_readout ; 			//address ram		// have to edit
+		assign wr_address_to_ram =  wr_enable_ram_read ?  wr_read_address_to_ram_from_readout : wr_address_to_ram_from_cpu ;
 		
 		
 		
