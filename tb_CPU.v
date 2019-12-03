@@ -6,6 +6,7 @@ module tb_CPU;
 	reg clk_main;
 	reg reset;
 	reg [15:0] data_from_rom;
+	reg [15:0] data_from_ram;
 
 	// Outputs
 	wire [5:0] address_to_rom;
@@ -16,7 +17,7 @@ module tb_CPU;
 	wire enable_ram_read;
 
 	// Bidirs
-	wire [15:0] data_ram;
+	wire [15:0] data_to_ram;
 
 	// Instantiate the Unit Under Test (UUT)
 	CPU uut (
@@ -25,10 +26,11 @@ module tb_CPU;
 		.data_from_rom(data_from_rom), 
 		.address_to_rom(address_to_rom), 
 		.enable_to_rom(enable_to_rom), 
-		.data_ram(data_ram), 
+		.data_from_ram(data_from_ram), 
 		.write_enable_to_ram(write_enable_to_ram), 
 		.read_enable_to_ram(read_enable_to_ram), 
-		.address_to_ram(address_to_ram), 
+		.address_to_ram(address_to_ram),
+		.data_to_ram(data_to_ram),
 		.enable_ram_read(enable_ram_read)
 	);
 
@@ -44,11 +46,17 @@ module tb_CPU;
 		#100;
         
 		// Add stimulus here
-		data_from_rom = 16'b1000000000000011;
+		data_from_rom = 16'b1000000000000110;
 		#500;
-		data_from_rom = 16'b1000000100000100;
+		data_from_rom = 16'b1000001000010001;
 		#500;
-		data_from_rom = 16'b0000001000000001;
+		data_from_rom = 16'b0000001100100000;
+		#500;
+		data_from_rom = 16'b1000000100000011;
+		#500;
+		data_from_rom = 16'b1010000000010011;
+		#500;
+		data_from_rom = 16'b1111111100000000;
 		#500;
 
 	end

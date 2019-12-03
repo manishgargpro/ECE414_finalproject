@@ -4,16 +4,16 @@ module CPU(
     input clk_main,
     input reset,
     input [15:0] data_from_rom, data_from_ram, //used
-    output [5:0] address_to_rom,
-    output enable_to_rom,
+    output [5:0] address_to_rom, //used
+    output enable_to_rom, //used
     output [15:0] data_to_ram, //used
     output write_enable_to_ram, //used
-    output read_enable_to_ram,
+    output read_enable_to_ram, //used
     output [5:0] address_to_ram, //used
     output enable_ram_read //special case, use only when opcode is 11111111
     );
 	 
-	 wire [15:0] BusA_w;
+	 wire [15:0] Addr_w;
 	 
 	 wire [3:0] DR_w, SA_w, SB_w, FS_w;
 	 
@@ -23,12 +23,20 @@ module CPU(
 	 
 	 assign address_to_rom = PC_w;
 	 
+	 assign enable_to_rom = 1'b1;
+	 
+	 assign read_enable_to_ram = 1'b1;
+	 
+	 assign enable_ram_read = ({FS_w,DR_w} == 8'b11111111)?1'b1:1'b0;
+	 
+	 assign address_to_ram = Addr_w[5:0];
+	 
 	 control_path c_p (
     .clk_main(clk_main), 
     .reset(reset), 
     .Z(Z_w), 
     .InstructIn(data_from_rom), //needs outside connection to ram/rom, not sure which one
-    .BusA(BusA_w), //same for this one
+    .BusA(Addr_w), //same for this one
     .DR(DR_w), 
     .SA(SA_w), 
     .SB(SB_w), 
@@ -55,9 +63,8 @@ module CPU(
     //.MM(MM_w), 
     .MD(MD_w), 
 	 .MP(MP_w),
-    .RW(RW_w), 
-    .BusA(BusA_w), //and this one
-    .AddrOut(address_to_ram), //and this one
+    .RW(RW_w),
+    .AddrOut(Addr_w), //and this one
     .DataOut(data_to_ram), //and this one
     .Z(Z_w)
 	 );

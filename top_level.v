@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module top_level(
     input reset,
-	 input btn_press,
+	 //input btn_press,
     input clk,
 	 output UART_TX
 	 //output [31:0] data_out_ram
@@ -154,7 +154,7 @@ module top_level(
 		
 		ip_rom_input_code ROM (
 	  .clka(clk), // input clka
-	  .ena(1'b1), // input ena
+	  .ena(wr_enable_to_rom), // input ena
 	  .addra(wr_address_to_rom), // input [5 : 0] addra
 	  .douta(wr_data_out_from_rom) // output [15 : 0] douta
 		);
@@ -166,12 +166,12 @@ module top_level(
 	 .clk_main(clk_cpu),
 	 //.btn_press(btn_press),
     .address_to_rom(wr_address_to_rom),							// 4bit
-    //.enable_to_rom(wr_enable_to_rom),
+    .enable_to_rom(wr_enable_to_rom),
 	 .data_from_ram(wr_data_from_ram),										//16bit inout port
 	 .data_to_ram(wr_data_to_ram),
 	 .write_enable_to_ram(wr_write_to_ram_from_cpu),
-	 .address_to_ram(wr_address_to_ram_from_cpu),				//4bit
-	 //.read_enable_to_ram(wr_read_enable_to_ram_from_cpu),
+	 .address_to_ram(wr_address_to_ram_from_cpu),				//6bit
+	 .read_enable_to_ram(wr_read_enable_to_ram_from_cpu),
 	 .enable_ram_read(wr_enable_ram_read)							//enable ram read and uart module
     );
 
@@ -193,7 +193,7 @@ module top_level(
 
 	ip_ram_output_code RAM (
 	  .clka(clk), // input clka
-	  .ena(1'b1), // input ena
+	  .ena(wr_enable_ram), // input ena
 	  .wea(wr_write_to_ram_from_cpu), // input [0 : 0] wea
 	  .addra(wr_address_to_ram), // input [5 : 0] addra
 	  .dina(wr_data_to_ram), // input [15 : 0] dina

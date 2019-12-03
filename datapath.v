@@ -7,8 +7,8 @@ module datapath(
 	 input [3:0] FS,
 	 input [5:0] PC,
     input MB, /*MM,*/ MD, RW, MP,
-    output [15:0] BusA, DataOut,
-	 output [5:0] AddrOut,
+    output [15:0] DataOut,
+	 output [15:0] AddrOut,
     output Z
     );
 	 
@@ -16,7 +16,7 @@ module datapath(
 	 
 	 assign DataOut = B2_w;
 	 
-	 assign AddrOut = A_w[5:0];
+	 assign AddrOut = A_w;
 	 
 	 mux2_16 muxP (
     .in0(D_w), 

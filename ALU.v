@@ -28,7 +28,7 @@ always @(*) begin
 		default: num_out <= num_out;
 	endcase
 
-	if (num_out == 4'b0000)
+	if (num_out == 16'b0)
 		z <= 1;
 	else
 		z <= 0;
