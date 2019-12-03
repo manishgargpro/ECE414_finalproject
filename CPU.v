@@ -10,7 +10,7 @@ module CPU(
     output write_enable_to_ram, //used
     output read_enable_to_ram, //used
     output [5:0] address_to_ram, //used
-    output enable_ram_read //special case, use only when opcode is 11111111
+    output enable_ram_read //used
     );
 	 
 	 wire [15:0] Addr_w;
