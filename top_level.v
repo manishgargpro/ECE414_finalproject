@@ -211,7 +211,7 @@ module top_level(
     .reset(wr_reset_read_ram),
 	 .data_from_ram(wr_data_from_ram),						//32bit
 	 .read_enable_to_ram(wr_read_ram),
-	 .address_to_ram(wr_read_address_to_ram_from_readout), 					//4bit
+	 .address_to_ram(wr_address_to_ram_from_readout), 					//4bit
     .uart_TX(UART_TX)
     );
 		

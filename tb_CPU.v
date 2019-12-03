@@ -47,17 +47,17 @@ module tb_CPU;
         
 		// Add stimulus here
 		data_from_rom = 16'b1000000000000110;
-		#500;
+		#200;
 		data_from_rom = 16'b1000001000010001;
-		#500;
+		#200;
 		data_from_rom = 16'b0000001100100000;
-		#500;
+		#200;
 		data_from_rom = 16'b1000000100000011;
-		#500;
+		#200;
 		data_from_rom = 16'b1010000000010011;
-		#500;
+		#200;
 		data_from_rom = 16'b1111111100000000;
-		#500;
+		#200;
 
 	end
 	
