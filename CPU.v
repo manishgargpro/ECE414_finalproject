@@ -27,7 +27,7 @@ module CPU(
 	 
 	 assign read_enable_to_ram = 1'b1;
 	 
-	 assign enable_ram_read = ({FS_w,DR_w} == 8'b11111111)?1'b1:1'b0;
+	 assign enable_ram_read = 1'b1/*({FS_w,DR_w} == 8'b11111111)?1'b1:1'b0*/;
 	 
 	 assign address_to_ram = Addr_w[5:0];
 	 
