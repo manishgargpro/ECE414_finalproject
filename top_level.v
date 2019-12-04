@@ -20,14 +20,13 @@
 //////////////////////////////////////////////////////////////////////////////////
 module top_level(
     input reset,
-	 //input btn_press,
+	 input btn_press,
     input clk,
 	 output UART_TX
 	 //output [31:0] data_out_ram
     );
 
 		//address line
-		wire [7:0] eoe_w;
 		wire[5:0] wr_address_to_rom ;
 		wire [5:0] wr_read_address_to_ram_from_readout, wr_address_to_ram_from_cpu, wr_address_to_ram ;
 		
@@ -50,8 +49,8 @@ module top_level(
 		
 		assign wr_enable_ram = wr_read_enable_to_ram_from_cpu || wr_write_to_ram_from_cpu  || wr_read_ram ;											//enable ram 
 		
-		//assign wr_address_to_ram =  ( wr_reset_read_ram ||  wr_read_enable_to_ram_from_cpu) ?  wr_address_to_ram_from_cpu : wr_read_address_to_ram_from_readout ; 			//address ram		// have to edit
-		assign wr_address_to_ram =  wr_enable_ram_read ?  wr_read_address_to_ram_from_readout : wr_address_to_ram_from_cpu ;
+		assign wr_address_to_ram =  ( wr_write_to_ram_from_cpu ||  wr_read_enable_to_ram_from_cpu) ?  wr_address_to_ram_from_cpu : wr_read_address_to_ram_from_readout ; 			//address ram		// have to edit
+		
 		
 		
 		
@@ -168,13 +167,12 @@ module top_level(
 	 //.btn_press(btn_press),
     .address_to_rom(wr_address_to_rom),							// 4bit
     .enable_to_rom(wr_enable_to_rom),
-	 .data_from_ram(wr_data_from_ram),										//16bit inout port
-	 .data_to_ram(wr_data_to_ram),
+	 .data_from_ram(wr_data_from_ram),
+	 .data_to_ram(wr_data_to_ram),										//16bit inout port
 	 .write_enable_to_ram(wr_write_to_ram_from_cpu),
-	 .address_to_ram(wr_address_to_ram_from_cpu),				//6bit
+	 .address_to_ram(wr_address_to_ram_from_cpu),				//4bit
 	 .read_enable_to_ram(wr_read_enable_to_ram_from_cpu),
-	 .enable_ram_read(wr_enable_ram_read),							//enable ram read and uart module
-	 .eoe(eoe_w)
+	 .enable_ram_read(wr_enable_ram_read)							//enable ram read and uart module
     );
 
 	
@@ -214,8 +212,7 @@ module top_level(
 	 .data_from_ram(wr_data_from_ram),						//32bit
 	 .read_enable_to_ram(wr_read_ram),
 	 .address_to_ram(wr_read_address_to_ram_from_readout), 					//4bit
-    .uart_TX(UART_TX),
-	 .eoe(eoe_w)
+    .uart_TX(UART_TX)
     );
 		
 

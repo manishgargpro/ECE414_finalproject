@@ -23,7 +23,6 @@ module read_from_ram(
 	 input reset,
     input [15:0] data_from_ram,
     input uart_ready,
-	 input [7:0] eoe,
     output reg [5:0] address_to_ram,
     output reg read_enable_to_ram,
     output reg uart_send,
@@ -43,7 +42,7 @@ module read_from_ram(
 	begin
 		if ( reset )
 			address_to_ram <= 0 ;
-		else if ( read_enable_to_ram && (eoe == 8'b11111111 && address_to_ram < 6'd63))
+		else if ( read_enable_to_ram )
 			address_to_ram <= address_to_ram + 4'b0001 ;
 		else
 			address_to_ram <= address_to_ram ;
@@ -64,10 +63,6 @@ module read_from_ram(
 	always @ (posedge clk)				//read_enable_to_ram  ---should be single cycle
 	begin
 		if (reset)
-			read_enable_to_ram <= 0 ;
-		else if (eoe == 8'b11111111 && address_to_ram < 6'd63)
-			read_enable_to_ram <= 1 ;
-		else if (eoe == 8'b11111111)
 			read_enable_to_ram <= 0 ;
 		else if ( ( ~stop ) && uart_sec_free && (~ read_enable_to_ram) )
 			read_enable_to_ram <= 1 ;

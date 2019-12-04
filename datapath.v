@@ -20,7 +20,7 @@ module datapath(
 	 
 	 mux2_16 muxP (
     .in0(D_w), 
-    .in1({10'b0,PC} + 1), 
+    .in1({10'b0,PC} + 1'b1), 
     .sel(MP), 
     .out(P_w)
     );
